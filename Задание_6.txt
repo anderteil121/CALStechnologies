@@ -1,0 +1,56 @@
+detail = {
+    "id": "Bolt-123",
+    "type": "Крепеж",
+    "weight_kg": 0.1
+}
+
+# Генерация XML (упрощённый STEP-формат)
+xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<step xmlns="urn:iso:std:iso:10303:-28:ed-2">
+  <header>
+    <file_description>
+      <description>Simplified STEP XML representation</description>
+    </file_description>
+  </header>
+  <data>
+    <product id="{detail['id']}">
+      <name>{detail['id']}</name>
+      <description>{detail['type']}</description>
+      <weight unit="kg">{detail['weight_kg']}</weight>
+    </product>
+  </data>
+</step>
+"""
+
+# Сохранение в файл
+with open('detail_step.xml', 'w', encoding='utf-8') as f:
+    f.write(xml_content)
+
+print("XML-файл успешно сохранён как 'detail_step.xml'")
+-----------------------------------------------------------------7
+import csv
+from random import uniform
+
+def create_equipment_csv(filename):
+    """Создает CSV-файл с оборудованием и показателями надежности"""
+    data = [
+        ["id", "name", "reliability"],
+        [1, "Двигатель X-2000", 0.98],
+        [2, "Турбина T-45", 0.95],
+        [3, "Генератор G-7", 0.97],
+        [4, "Компрессор C-12", 0.93],
+        [5, "Насос N-300", 0.96],
+        [6, "Редуктор R-85", 0.94],
+        [7, "Трансформатор TR-5", 0.99],
+        [8, "Клапан KV-10", 0.91],
+        [9, "Фильтр F-200", 0.92],
+        [10, "Датчик S-1000", 0.97]
+    ]
+    
+    with open(filename, mode='w', encoding='utf-8', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(data)
+    
+    print(f"Файл {filename} успешно создан с {len(data)-1} записями")
+
+create_equipment_csv("equipment_reliability.csv")
